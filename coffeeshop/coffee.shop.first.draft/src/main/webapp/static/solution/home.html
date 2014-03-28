@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Coffee Project</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script src="./js/main.js"></script>
+</head>
+<body>
+	<div id="header">Coffee Shop</div>
+	<div id="subheader">
+		<div id="tabsArea"></div>
+	</div>
+	<div id="content">
+		<div id="content-container">Here goes the content injected by/from backbone.js views</div>
+	</div>
+	<div id="footer">Copyright (c) Coffee Shop 2014</div>
+
+<!-- this is the templates section -->	
+
+<script id="tabContainerTemplate" type="text/template">
+	<div class='tabs'>
+   	 	<div class='tab tabHomePage'>Home Page</div>
+    	<div class='tab tabCoffeeCollectionPage'>Coffees</div>
+	</div>
+</script>
+
+<!-- this is the homePage view template -->
+
+<script id="homePageViewTemplate" type="text/template">
+<h3>Welcome to Home Page</h3>
+<div class="CSSTableGenerator">
+    <table>
+        <tr>
+            <td colspan="3">Importers of specialty coffees from all over the world.</br> We bring you the finest beans and the best roasts.</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+				We work hard to find the best coffees so your morning cup of joe is everything but average!			
+			</td>
+        </tr>
+        <tr>
+            <td> 
+				<div class="homePageLeftColumn">
+							We import favorite coffees from countries like: </br></br>
+						Mexico</br>
+							~Costa Rica</br>
+							~Colombia</br>
+							~Ecuador</br>
+							~Bolivia</br>
+							~Chile</br>
+							~Argentina</br>
+							~Brazil</br>
+							~Guatemala</br>
+							~Puerto Rico</br>
+							~Hawaii</br>
+							~Vietnam</br>
+							~Indonesia</br>
+							~India</br>
+							~Ethipia</br>
+							~Somalia</br>
+							~India</br>
+							~Singapore</br>
+				</div>
+			</td>
+            <td><img class="homePageImage" src="images/coffees.jpg"/></td>
+            <td>				
+					<div class="homePageRightColumn">
+							Our warehouses stock coffee from all regions: </br></br>
+							~Mountain-grown</br>
+							~Shade-grown</br>
+							~Cultured</br><br/>
+
+							We also have seasoned coffe for spice lovers: </br><br/>
+							~Holiday spice</br>
+							~Cheyenne spice</br>
+							~Cinnamon spice</br>
+							~Mint infusion</br>
+							~Caramel spice</br>
+							~Chocolate infusion</br>
+							~Lemon zest</br>
+							~So many more...</br>
+					</div>
+			</td>
+        </tr>
+        <tr>
+            <td colspan="3">At the Coffee Shop, you can select any coffee you like, be it traditional, seasonal, or a custom blend. We make sure to give you the widest variety to chose from. <br/>
+			Do you like a coffee that we do not have? Make sure to go to our contact us page to fill out a form by email and send it to us and customer support will be happy to order it and include it in our inventory. <br/>
+			Our website and selection is ever-expanding. Be sure to visit us to see what's new for your brew!
+			</td>
+        </tr>
+    </table>
+</div>
+</script>
+
+<!-- this is the coffee collection template -->
+
+<script id="coffeeCollectionTemplate" type="text/template">
+<h3>Welcome to the Coffee Selection list</h3>
+<div class="CSSTableGenerator">
+	<div class="container">
+	<table class="coffeeCollectionTable" id="coffeeCollectionViewContainer">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Region</th>
+		<th>Country</th>
+		<th>Processed</th>
+		<th>Weight</th>
+	</tr>
+	</table>
+	<img class="centralPicture" src="images/scoop-slide.jpg" style=" text-align: center;"/>
+</div>
+</div>
+</script>
+
+<!-- this is the coffee item template -->
+<script id="coffeeItemTemplate" type="text/template">
+
+    <td><%= name %></strong></td>
+	<td>(<%= description %>)</td> 
+	<td>(<%= region %>)</td> 
+	<td><%= country %></td> 
+	<td><%= processed %></td> 
+	<td><%= weight %></td> 
+
+</script>
+
+</body>
+</html>

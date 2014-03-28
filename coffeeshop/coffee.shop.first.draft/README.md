@@ -1,0 +1,1 @@
+Demonstrates how to create basic Backbone.js application
