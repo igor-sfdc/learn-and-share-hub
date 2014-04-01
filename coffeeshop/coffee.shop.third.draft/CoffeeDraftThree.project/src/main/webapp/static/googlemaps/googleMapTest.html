@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("maps", "3.4", {
+		other_params : "sensor=false&language=en"
+	});
+</script>
+<script type="text/javascript" src="jquery.googlemap.js"></script>
+
+
+
+</head>
+<body>
+<div id="map" style="width: 300px; height: 300px;">MAP</div>
+<script type="text/javascript">
+  $(function() {
+    $("#map").googleMap();
+    $("#map").addMarker({
+ //   defaultcoords:[8.3782587,40.7131003,7],
+      coords: [8.3782587,40.7131003,1], // GPS coords
+      title: 'Marker n°1', // Title
+      text:  '<b>Lorem ipsum</b> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' // HTML content
+    });
+  })
+</script>
+</body>
+</html>

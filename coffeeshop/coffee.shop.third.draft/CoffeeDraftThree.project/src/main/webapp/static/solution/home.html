@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Coffee Project</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script src="./js/main.js"></script>
+</head>
+<body>
+	<div id="header">Coffee Shop</div>
+	<div id="subheader">
+		<div id="tabsArea"></div>
+	</div>
+	<div id="content">
+		<div id="content-container">Here goes the content injected by/from backbone.js views</div>
+	</div>
+	<div id="footer">Copyright (c) Coffee Shop 2014</div>
+
+<!-- this is the templates section -->	
+
+<script id="tabContainerTemplate" type="text/template">
+	<div class='tabs'>
+   	 	<div class='tab tabHomePage'>Home Page</div>
+   	 	<div class='tab tabAboutUsPage'>About Us</div>
+    	<div class='tab tabNewCoffeePage'>New Coffee</div>
+    	<div class='tab tabCoffeeCollectionPage'>Coffees</div>
+    	<div class='tab tabContactUsPage'>Contact Us</div>
+    	<div class='tab tabHelpPage'>Help</div>
+	</div>
+</script>
+
+<!-- this is the homePage view template -->
+
+<script id="homePageViewTemplate" type="text/template">
+<h3>Welcome to Home Page</h3>
+<div class="CSSTableGenerator">
+    <table>
+        <tr>
+            <td colspan="3">Importers of specialty coffees from all over the world.</br> We bring you the finest beans and the best roasts.</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+				We work hard to find the best coffees so your morning cup of joe is everything but average!			
+			</td>
+        </tr>
+        <tr>
+            <td> 
+				<div class="homePageLeftColumn">
+							We import favorite coffees from countries like: </br></br>
+						Mexico</br>
+							~Costa Rica</br>
+							~Colombia</br>
+							~Ecuador</br>
+							~Bolivia</br>
+							~Chile</br>
+							~Argentina</br>
+							~Brazil</br>
+							~Guatemala</br>
+							~Puerto Rico</br>
+							~Hawaii</br>
+							~Vietnam</br>
+							~Indonesia</br>
+							~India</br>
+							~Ethipia</br>
+							~Somalia</br>
+							~India</br>
+							~Singapore</br>
+				</div>
+			</td>
+            <td><img class="homePageImage" src="images/coffees.jpg"/></td>
+            <td>				
+					<div class="homePageRightColumn">
+							Our warehouses stock coffee from all regions: </br></br>
+							~Mountain-grown</br>
+							~Shade-grown</br>
+							~Cultured</br><br/>
+
+							We also have seasoned coffe for spice lovers: </br><br/>
+							~Holiday spice</br>
+							~Cheyenne spice</br>
+							~Cinnamon spice</br>
+							~Mint infusion</br>
+							~Caramel spice</br>
+							~Chocolate infusion</br>
+							~Lemon zest</br>
+							~So many more...</br>
+					</div>
+			</td>
+        </tr>
+        <tr>
+            <td colspan="3">At the Coffee Shop, you can select any coffee you like, be it traditional, seasonal, or a custom blend. We make sure to give you the widest variety to chose from. <br/>
+			Do you like a coffee that we do not have? Make sure to go to our contact us page to fill out a form by email and send it to us and customer support will be happy to order it and include it in our inventory. <br/>
+			Our website and selection is ever-expanding. Be sure to visit us to see what's new for your brew!
+			</td>
+        </tr>
+    </table>
+</div>
+</script>
+
+<!-- this is the coffee collection template -->
+
+<script id="coffeeCollectionTemplate" type="text/template">
+<h3>Welcome to the Coffee Selection list</h3>
+<div class="CSSTableGenerator">
+	<div class="container">
+	<table class="coffeeCollectionTable" id="coffeeCollectionViewContainer">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Region</th>
+		<th>Country</th>
+		<th>Processed</th>
+		<th>Weight</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	</table>
+	<img class="centralPicture" src="images/scoop-slide.jpg" style=" text-align: center;"/>
+</div>
+</div>
+</script>
+
+<!-- this is the about us page template -->
+
+<script id="aboutUsPageViewTemplate" type="text/template">
+<h3>Welcome to About Us</h3>
+<div class="CSSTableGenerator">
+    <table>
+        <tr>
+            <td colspan="3">A family coffee roasting company, bringing quality to other connoiseurs.</td>
+        </tr>
+        <tr>
+            <td colspan="2">  
+					<div class="logo">   
+					##.......................####<br/>
+					##.......................##    ##<br/>
+					##.......................##     ##<br/>
+					##.......................##   ##<br/>
+					 ##....................###<br/>
+ 					  ##...............##<br/>
+ 					      ##########<br/>
+  					      ###########<br/>
+					   #################<br/>
+						COFFEE SHOP
+					</div>
+			</td>
+        </tr>
+        <tr>
+            <td> 
+				<div class="homePageLeftColumn">
+					Company History: <br/>Coffee always ran in the family. 
+					company history: My father loved coffee and would collect various sorts and different roasts and I grew up with a similar appreciation of coffee. 
+					My appretiation spanned beyond the mainstream outlet psudo-coffee breweries of corporations. Now this is my little company run from home!<br/> Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler 
+				</div>
+			</td>
+            <td>				
+					<div class="homePageRightColumn">Personal history:<br/> I grew up with a passion for science and technology. I followed my father's career footsteps to be a programmer and got interested in coffee on the side. It was an unexpected turn of events that I managed to do both at the same time. My passion for programming and my passion for the best coffee brew are brought to you in this page.<br/> Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler Text Filler </div>
+			</td>
+        </tr>
+        <tr>
+            <td colspan="2">Our warehouses were acquired from former coffee sellers and were fully refurbished and certified for service. You can be guaranteed that your coffee is handled with the utmost care and precaution to ensure that you get the best selected beans in the batch. Our facility undergoes regular annual inspections from various certified agencies to make sure thee business is clean.</td>
+        </tr>
+    </table>
+</div>
+</script>
+<!-- this is the contact us page view template -->
+<script id="contactUsPageViewTemplate" type="text/template">
+<h3>Welcome to About Us</h3>
+	<div class="CSSTableGenerator">
+		<table>
+			<tr>
+				<td>Stores</td>
+				<td>Phones</td>
+				<td>Emails</td>
+				<td>Help with Shipping</td>
+				<td>Customer Support</td>
+			</tr>
+			<tr>
+				<td>Address 1</td>
+				<td>phone# 1</td>
+				<td>email 1</td>
+				<td>Shipping 1</td>
+				<td>Customer Support 1</td>								
+			</tr>
+			<tr>
+				<td>Address 2</td>
+				<td>phone# 2</td>								
+				<td>email 2</td>
+				<td>Shipping 2</td>
+				<td>Customer Support 2</td>								
+			</tr>
+			<tr>
+				<td>Address 3</td>
+				<td>phone# 3</td>								
+				<td>email 3</td>
+				<td>Shipping 3</td>
+				<td>Customer Support 3</td>								
+			</tr>
+			<tr>
+				<td>Address 4</td>
+				<td>phone# 4</td>								
+				<td>email 4</td>
+				<td>Shipping 3</td>
+				<td>Customer Support 4</td>								
+			</tr>
+			<tr>
+				<td>Address 5</td>
+				<td>phone# 5</td>								
+				<td>email 5</td>
+				<td>Shipping 3</td>
+				<td>Customer Support 5</td>								
+			</tr>
+			<tr>
+				<td>Address 6</td>
+				<td>phone# 6</td>								
+				<td>email 6</td>
+				<td>Shipping 6</td>
+				<td>Customer Support 6</td>								
+			</tr>														
+			</table>
+						
+			<table>
+				<tr>
+					<td>
+					<div class="logo">      
+					##.......................####<br/>
+					##.......................##    ##<br/>
+					##.......................##     ##<br/>
+					##.......................##   ##<br/>
+					 ##....................###<br/>
+ 					  ##...............##<br/>
+ 					      ##########<br/>
+  					      ###########<br/>
+					   #################<br/>
+						COFFEE SHOP
+					</div>
+					</td>
+				</tr>
+			</table>
+						
+			<table>
+				<tr>
+					<td colspan="2">
+						Hours of Operation
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Weekdays
+					</td>
+					<td>
+						Weekends and Holidays
+					</td>								
+				</tr>							
+				<tr>
+					<td>
+						* Monday: time-time<br/>
+						* Tuesday: time-time<br/>
+						* Wednesday: time-time<br/>		
+						* Thursday: time-time<br/>	
+						* Friday: time-time<br/>																																	
+					</td>
+					<td>
+						time-time
+					</td>									
+				</tr>
+			</table>			
+	</div>	
+</script>
+
+<!-- this is the coffee item template -->
+<script id="coffeeItemTemplate" type="text/template">
+
+    <td><%= id %></td>
+    <td><%= name %></strong></td>
+	<td>(<%= description %>)</td> 
+	<td>(<%= region %>)</td> 
+	<td><%= (App.Instances.countryCollection.countryNameFromId(countryFromId)) %></td> 
+	<td><%= processed %></td> 
+	<td><%= weight %></td> 
+	<td><a href="" onclick="App.Instances.appRouter.visitCoffeePage(<%= id %>, true); return false;" title="Click to edit coffee">Edit</a></td>
+	<td><a href="" onclick="App.Instances.appRouter.visitCoffeePage(<%= id %>, false); return false;" title="Click to view coffee">View</a></td>
+	<td><a href="" class="delete" title="Click to delete coffee">Delete</a></td>
+
+</script>
+
+<!-- this is the coffee view template -->
+<script id="coffeeViewTemplate" type="text/template">
+<div class="header">View Your Coffee</div>
+	<div class="CSSTableGenerator">
+		<div class="container">
+			Name: <%= name %></br> 
+			Description: <%= description %></br> 
+			Region: <%= region %></br> 
+			Country: <%= countryFromId %> 
+			Processed: <%= processed %> 
+			Weight: <%= weight%>
+		</div>
+	</div>
+<div id="map">MAP</div>
+</script>
+
+<!-- this is the coffee edit template -->
+<script id="coffeeEditTemplate" type="text/template">
+<h3>Edit Your Coffee Selection</h3>
+<div class="CSSTableGenerator">
+	<div class="container">	
+			<div id="coffeeForm"></div>
+	</div>
+</div>
+</script>
+
+<!-- this is the new coffee template -->
+<script id="coffeeNewTemplate" type="text/template">
+<h3>Select a New Coffee</h3>
+<div class="CSSTableGenerator">
+	<div class="container">
+		<div id="coffeeForm"></div>
+	</div>
+</div>
+</script>
+
+<!-- this is the coffee form template -->
+<script id="coffeeFormTemplate" type="text/template">
+<div>
+<div class="coffeeform">
+<table class="coffeeFormTable">
+	<tr>	
+		<td>Name:</td><td><input id="name" 	type="text" value="<%= name %>"></td>
+	<tr/>
+	<tr>	
+		<td>Description:</td><td><input id="description" 	type="text" value="<%= description %>"></td>
+	<tr/>
+	<tr>	
+		<td>Region:</td><td><input id="region" 	type="text" value="<%= region %>"></td>
+	<tr/>
+
+	<tr>	
+		<td>Country:</td><td>
+			<select id="countryFromId" name="countryFromId">
+    			<option value="">--select a country--</option>
+    			<% _(App.Instances.countryCollection.models).each(function(element) {
+					var selectedFlag = element.attributes.id == countryFromId ? "selected" : "";
+				%>
+      			<option <%= selectedFlag %> value='<%= element.attributes.id %>'><%= element.attributes.name %></option>
+    			<% }); %>
+			</select>
+		</td>
+	<tr/>
+
+	<tr>	
+		<td>Processed:</td><td><input id="processed" type="text" value="<%= processed %>"></td>
+	<tr/>
+	<tr>	
+		<td>Weight:</td><td><input id="weight" type="text" value="<%= weight %>"></td>
+	<tr/>
+</table>
+		<button class="cancel">Cancel</button>
+		<button class="save">Save</button>
+</div>
+
+<!-- Google map is injected into this div -->
+<div id="map">MAP</div>
+</div>
+</script>
+
+<!-- this is the help page template -->
+<script id="helpPageTemplate" type="text/template">
+<h3>Welcome to Help Page</h3>
+					<div class="CSSTableGenerator">
+						<table>
+							<tr>
+								<td>Questions about Fair Trade</td>
+								<td>Questions about coffee</td>
+								<td>Questions about roasting</td>
+								<td>Questions about brewing</td>
+								<td>Questions asked about taste</td>
+								<td>Questions about color</td>
+								<td>Questions about growth</td>																																
+							</tr>
+							<tr>
+								<td>What is Fair Trade?</td>
+								<td>What is coffee?</td>
+								<td>How is coffee roasted?</td>
+								<td>What methods of brewing are there?</td>
+								<td>Which varieties have best taste?</td>
+								<td>What determines bean color?</td>
+								<td>How is coffee grown?</td>								
+							</tr>
+							<tr>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>								
+							</tr>							
+							<tr>
+								<td>How does Fair Trade work?</td>
+								<td>How does coffee hurt?</td>
+								<td>What is the difference between roasts?</td>
+								<td>Which methods of brewing are better?</td>
+								<td>Which varieties top in taste?</td>
+								<td>What affects coffee color?</td>
+								<td>What affects coffee growth?</td>								
+							</tr>
+							<tr>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>								
+							</tr>								
+							<tr>
+								<td>Where does Fair Trade work?</td>
+								<td>How does coffee harm?</td>
+								<td>Which roasts are better?</td>
+								<td>How was coffee originally brewed?</td>
+								<td>What determines taste?</td>
+								<td>Which is the best color?</td>
+								<td>Origin of coffee growth</td>								
+							</tr>
+							<tr>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>
+								<td>Example answer here</td>								
+							</tr>								
+						</table>
+					</div>	
+</script>
+
+<!-- coffee form template to merge -->
+<script id="coffeeFormTemplateToMerge"type="text/template">
+					<div class="CSSTableGenerator">
+						<table>
+							<tr>
+								<td>Please enter coffee information</td>
+								<td>Where in the world is this coffee</td>
+							</tr>
+							<tr>
+								<td><table class="coffeeFormTable">
+									<tr>	
+										<td>Name:</td><td><input id="name" 	type="text" value="name"></td>
+									</tr>
+									<tr>	
+										<td>Description:</td><td><input id="description" 	type="text" value="description"></td>
+									</tr>
+									<tr>	
+										<td>Region:</td><td><input id="region" 	type="text" value="region"></td>
+									</tr>
+									<tr>	
+										<td>Country:</td>
+										<td>
+											<select id="countryFromId" name="countryFromId">
+    											<option value="">--select a country--</option>
+    											<option value="">--select a country--</option>
+    											<option value="">--select a country--</option>
+											</select>
+										</td>
+									</tr>
+									<tr>	
+										<td>Processed:</td><td><input id="processed" type="text" value="processed"></td>
+									</tr>
+									<tr>	
+										<td>Weight:</td><td><input id="weight" type="text" value="weight"></td>
+									</tr>
+									<tr>	
+										<td colspan="2">		
+											<button class="cancel">Cancel</button>
+											<button class="save">Save</button></td>
+									</tr>
+									</table></td>
+								<td><!-- Google map is injected into this div -->
+								<div id="map">MAP</div></td>
+							</tr>
+							<tr>
+								<td>Generate Coffee brief</td>
+								<td>Generate Country brief</td>
+							</tr>
+						</table>
+					</div>	
+</script>
+</body>
+</html>
