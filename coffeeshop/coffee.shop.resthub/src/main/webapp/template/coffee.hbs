@@ -1,0 +1,42 @@
+<div>
+<div class="coffeeform">
+<table class="coffeeFormTable">
+	<tr>	
+		<td>Name:</td><td><input id="name" 	type="text" value="{{model.attributes.name}}"></td>
+	<tr/>
+	<tr>	
+		<td>Description:</td><td><input id="description" 	type="text" value="{{model.attributes.description}}"></td>
+	<tr/>
+	<tr>	
+		<td>Region:</td><td><input id="region" 	type="text" value="{{model.attributes.region}}"></td>
+	<tr/>
+
+	<tr>	
+		<td>Country:</td><td>
+			<select id="countryFrom" name="countryFrom">
+    			<option value="">--select a country--</option>
+    			
+    			{{#each countryCollection.models}}
+        			<option {{#ifeq attributes.id ../model.attributes.countryFrom.id}}selected{{else}}{{/ifeq}} 
+        					value="{{attributes.id}}">{{attributes.name}}</option>
+    			{{/each}}
+    			
+			</select>
+		</td>
+	<tr/>
+
+	<tr>	
+		<td>Processed:</td><td><input id="processed" type="text" value="{{model.attributes.processed}}"></td>
+	<tr/>
+	<tr>	
+		<td>Weight:</td><td><input id="weight" type="text" value="{{model.attributes.weight}}"></td>
+	<tr/>
+</table>
+		<button class="cancel">Cancel</button>
+		<button class="save">Save</button>
+</div>
+
+<!-- Google map is injected into this div -->
+<!--todelete one of these two-->
+<div id="map">MAP</div>
+</div>

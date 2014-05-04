@@ -1,0 +1,48 @@
+<h3>Welcome to the Coffee Selection list</h3>
+<div class="CSSTableGenerator">
+	<table class="coffeeCollectionTable" id="coffeeCollectionViewContainer">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Region</th>
+		<th>Country</th>
+		<th>Processed</th>
+		<th>Weight</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	
+	
+    {{#each collection.models}}
+        <tr>
+        	<td>
+        		{{attributes.id}}
+        	</td> 
+        	<td>
+        		{{attributes.name}}
+        	</td> 
+        	<td>
+        		{{attributes.description}}
+        	</td> 
+        	<td>
+        		{{attributes.region}}
+        	</td> 
+        	<td>
+        		{{attributes.countryFrom.name}}
+        	</td>
+        	<td>
+        		{{attributes.processed}}
+        	</td>        	
+        	<td>	
+        		{{attributes.weight}}
+        	</td>
+        	<td><a href="/#coffee/{{id}}" title="Click to edit coffee">Edit</a></td>
+        	<td><a href="/#coffeeReadonly/{{id}}" title="Click to view coffee">View</a></td>
+        	<td><a class="delete" href="javascript: void(0)" value="{{id}}">Delete</a></td>    	
+        </tr>
+    {{/each}}
+		
+	</table>
+</div>

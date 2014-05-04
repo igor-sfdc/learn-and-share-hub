@@ -1,0 +1,31 @@
+<div>
+<div class="coffeeform">
+<table class="coffeeFormTable">
+	<tr>	
+		<td>Name:</td><td>{{model.attributes.name}}</td>
+	<tr/>
+	<tr>	
+		<td>Description:</td><td>{{model.attributes.description}}</td>
+	<tr/>
+	<tr>	
+		<td>Region:</td><td>{{model.attributes.region}}</td>
+	<tr/>
+
+	<tr>	
+		<td>Country:</td><td>model.attributes.countryFrom.name</td>
+	<tr/>
+
+	<tr>	
+		<td>Processed:</td><td>{{model.attributes.processed}}</td>
+	<tr/>
+	<tr>	
+		<td>Weight:</td><td>{{model.attributes.weight}}</td>
+	<tr/>
+</table>
+		<button class="back">Back</button>
+</div>
+
+<!-- Google map is injected into this div -->
+
+<div id="map">MAP</div>
+</div>
