@@ -4,4 +4,4 @@ This is the same coffee project tutorial as draft three but completed using rest
 
 By running the RESThub archetype I was able to generate many default parts for the project and then add my custom code. 
 
-TDOO: Describe custom code changes
+TODO: Describe custom code changes
