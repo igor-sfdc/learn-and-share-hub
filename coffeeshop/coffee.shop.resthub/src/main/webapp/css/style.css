@@ -101,6 +101,13 @@
 	bottom: 0;
 }
 
+#error-messages {
+	color: red;
+	text-align: left;
+	padding: 5px;
+	font-weight: bold;
+}
+
 .coffeeFormTable {
 	background-color: #996600;
 	color: yellow;

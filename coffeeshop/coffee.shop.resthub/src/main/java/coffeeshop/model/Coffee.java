@@ -29,7 +29,7 @@ public class Coffee {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "country_id")
-    @NotNull
+    @NotNull(message="Country must be selected")
     Country countryFrom;
 //===========================================================    
     

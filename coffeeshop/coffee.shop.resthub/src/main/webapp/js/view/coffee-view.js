@@ -1,16 +1,29 @@
-define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!template/coffee'],
+define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!template/coffee', 'backbone-validation'],
 		function (Backbone, Resthub, Coffee, Countries, coffeeTemplate) {
 
 	var CoffeeView = Resthub.View.extend({
 
 		// Define view template
 		template: coffeeTemplate,
+		
+		errors: [],
 
 		initialize: function() {       	        	
 			// Initialize the model
-			this.model = new Coffee({id: this.id}, {errorCallback: function(resp) {
-				alert("error");
-			}}); 
+			this.model = new Coffee({id: this.id}, {errorCallback: _.bind(this.showError)}); 
+			// Enable backbone validation
+			Backbone.Validation.bind(this, {
+				valid: function(view, attr) {
+					// Do nothing (should probably clear the previous error message if any).
+				},
+				invalid: function(view, attr, error) {
+					view.errors.push({attribute: attr, message: error});
+				}
+			});
+			
+			// Register a function to handle validation errors
+			this.model.on("invalid", this.showValidationError, this);
+			
 			// Start loading country collection after the model is retrieved from the server 
 			this.listenTo(this.model, 'sync', this.startLoadingCountryCollection);               
 			// Request un-paginated URL
@@ -56,6 +69,17 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 			var countryModel = this.countryCollection.get(selectedCountryId);
 			this.renderMap(countryModel.attributes.latitude, countryModel.attributes.longitude, countryModel.attributes.zoom);	     
 		},
+		showError: function (resp) {
+			alert("show error: " + resp);
+		},		
+		showValidationError: function () {
+			var errorMessage  = "";
+			// Concatenate all the error messages and apply them to the target <div>
+			this.errors.forEach(function(errorElement){
+				errorMessage += "<div>" + errorElement.attribute + ": " + errorElement.message + "</div>";
+			});
+			$("#error-messages").html(errorMessage);
+		},		
 		saveCoffee: function() {
 			console.log("coffee saved: " + $('#name').val());
 
@@ -67,8 +91,12 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 					region: $('#region').val(),
 					weight: $('#weight').val(),
 			};
+			
+			// Clear potential left-over errors before validation
+			this.errors = [];
+			$("#error-messages").html("");
+			
 			var tempAppRouter = this.appRouter;
-
 			this.model.save(coffeeDetailsUpdated, {
 				success : function(modelSaved, response) {
 					console.log("model successfully saved");
@@ -78,7 +106,7 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 					console.log("error saving model");
 				}
 			});
-
+			
 			return false;		
 		}
 
