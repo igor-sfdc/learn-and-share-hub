@@ -5,12 +5,12 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 
 		// Define view template
 		template: coffeeTemplate,
-		
+
 		errors: [],
 
 		initialize: function() {       	        	
 			// Initialize the model
-			this.model = new Coffee({id: this.id}, {errorCallback: _.bind(this.showError)}); 
+			this.model = new Coffee({id: this.id}); 
 			// Enable backbone validation
 			Backbone.Validation.bind(this, {
 				valid: function(view, attr) {
@@ -20,10 +20,10 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 					view.errors.push({attribute: attr, message: error});
 				}
 			});
-			
+
 			// Register a function to handle validation errors
 			this.model.on("invalid", this.showValidationError, this);
-			
+
 			// Start loading country collection after the model is retrieved from the server 
 			this.listenTo(this.model, 'sync', this.startLoadingCountryCollection);               
 			// Request un-paginated URL
@@ -68,10 +68,7 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 			var selectedCountryId = event.target.value;
 			var countryModel = this.countryCollection.get(selectedCountryId);
 			this.renderMap(countryModel.attributes.latitude, countryModel.attributes.longitude, countryModel.attributes.zoom);	     
-		},
-		showError: function (resp) {
-			alert("show error: " + resp);
-		},		
+		},	
 		showValidationError: function () {
 			var errorMessage  = "";
 			// Concatenate all the error messages and apply them to the target <div>
@@ -91,11 +88,11 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 					region: $('#region').val(),
 					weight: $('#weight').val(),
 			};
-			
+
 			// Clear potential left-over errors before validation
 			this.errors = [];
 			$("#error-messages").html("");
-			
+
 			var tempAppRouter = this.appRouter;
 			this.model.save(coffeeDetailsUpdated, {
 				success : function(modelSaved, response) {
@@ -106,10 +103,13 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 					console.log("error saving model");
 				}
 			});
-			
-			return false;		
-		}
 
+			return false;		
+		},
+		cancelCoffee: function() {
+			// This allows the user to be returned to the page they were before pressing cancel.
+			window.history.back();
+		}
 	});
 	return CoffeeView;
 });

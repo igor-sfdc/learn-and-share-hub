@@ -9,7 +9,13 @@ define(['backbone', 'resthub'], function(Backbone, Resthub) {
 			// 'validation.NotNull.message': 'the field should not be null'
 		},
 		initialize: function(attributes, options) {
-			Resthub.Validation.synchronize(Coffee, options.errorCallback);
+			// Capture current value of "this" to pass it into the function
+			var _this = this;
+			Resthub.Validation.synchronize(Coffee, function(response) {
+				alert("Error when trying to synchronize with server-side validation API."
+						+ "\n\nStatus: " + response.statusText
+						+ "\nModel class: " + _this.className);
+			});
 		},		
 		defaults: {
 			name: "name",
