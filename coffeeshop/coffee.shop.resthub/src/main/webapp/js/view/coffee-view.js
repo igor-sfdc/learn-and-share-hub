@@ -66,8 +66,17 @@ define([ 'backbone', 'resthub', 'model/coffee', 'collection/countries', 'hbs!tem
 		},
 		updateMap: function(event) {
 			var selectedCountryId = event.target.value;
-			var countryModel = this.countryCollection.get(selectedCountryId);
-			this.renderMap(countryModel.attributes.latitude, countryModel.attributes.longitude, countryModel.attributes.zoom);	     
+			if (selectedCountryId) {
+				var countryModel = this.countryCollection.get(selectedCountryId);
+				this.renderMap(countryModel.attributes.latitude, countryModel.attributes.longitude, countryModel.attributes.zoom);				
+			} else {
+				// Render default map
+				// TODO: refactor this as a reusable function
+				var lat = 0;
+				var lon = 0;
+				var z = 1;
+				this.renderMap(lat, lon, z);
+			}
 		},	
 		showValidationError: function () {
 			var errorMessage  = "";

@@ -21,9 +21,15 @@ function (Backbone, Resthub, Coffee, Countries, coffeeReadonlyTemplate) {
         render: function() {
         	var html = this.template(this);
         	this.$el.html(html);
+			var country = this.model.attributes.countryFrom;
+			var lat = country.latitude;
+			var lon = country.longitude;
+			var z = country.zoom;
+
+			this.renderMap(lat, lon, z);
         },
 		events : {
-			"click .back" : "backToCoffees"
+			"click .back" : "backFunction"
 		},
 		renderMap: function(lat, ltt, z) {
 			var myLatlng = new google.maps.LatLng(lat, ltt);
@@ -35,11 +41,11 @@ function (Backbone, Resthub, Coffee, Countries, coffeeReadonlyTemplate) {
 			//we are assuming there is only one element that can be found with id = map
 			$("#map").each(function() {
 				new google.maps.Map(this, mapOptions);
-			});
+			});			
 		},
-		backToCoffee: function() {
-			location.href = "/#coffees";
-			return false;		
+		
+		backFunction: function() {
+			window.history.back();		
 		}
 
     });

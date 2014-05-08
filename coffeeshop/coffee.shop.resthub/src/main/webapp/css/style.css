@@ -110,6 +110,7 @@
 
 .coffeeFormTable {
 	background-color: #996600;
+	text-align: left;
 	color: yellow;
 	border: solid thin black;
 	min-width: 300px;
@@ -118,10 +119,15 @@
 
 .coffeeFormTable td {
 	height: 2em;
+	padding-left: 10px;
 }
 
 .coffeeform {
 	float: left;
+}
+
+button.back {
+	margin-top: 10px;
 }
 
 #map {
