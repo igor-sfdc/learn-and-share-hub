@@ -19,7 +19,7 @@ import coffeeshop.repository.CountryRepository;
 @Controller
 @RequestMapping(value = "/api/country")
 public class CountryController extends RepositoryBasedRestController<Country, Long, CountryRepository> {
-    private final Logger slf4jLogger = LoggerFactory.getLogger(CountryController.class);
+    private final Logger slf4jLogger = LoggerFactory.getLogger(getClass());
 
     @Inject
     @Named("countryRepository")

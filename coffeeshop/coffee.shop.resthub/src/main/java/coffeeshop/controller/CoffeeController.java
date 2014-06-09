@@ -20,7 +20,7 @@ import coffeeshop.repository.CoffeeRepository;
 @Controller
 @RequestMapping(value = "/api/coffee")
 public class CoffeeController extends RepositoryBasedRestController<Coffee, Long, CoffeeRepository> {
-    private final Logger slf4jLogger = LoggerFactory.getLogger(CoffeeController.class);
+    private final Logger slf4jLogger = LoggerFactory.getLogger(getClass());
 
     @Inject
     @Named("coffeeRepository")
