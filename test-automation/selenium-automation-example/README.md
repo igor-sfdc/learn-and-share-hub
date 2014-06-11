@@ -17,8 +17,9 @@ __This is a simple Selenium test automation example project. Below are the steps
  * ```maven-resources-plugin```
  * ```jetty-maven-plugin```
 
-###### Now create a simple index.html containing a div with an id="hello"
-###### Go into src/test/java and create a new class
+###### Create a simple ```index.html``` containing a ```div``` with an ```id="hello```"
+###### Go into src/test/java and create a new test class
+ * ```selenium.integration.SeleniumHelloIntegrationTest```
  * In that class we need a simple junit test that:
   * Creates an instance of `WebDriver`
   * Loads the `http://localhost:8080/index.html` page
