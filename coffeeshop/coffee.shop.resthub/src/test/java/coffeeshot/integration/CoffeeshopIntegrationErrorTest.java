@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import coffeeshot.integration.util.TestUtil;
+import coffeeshop.integration.util.TestUtil;
 
 public class CoffeeshopIntegrationErrorTest extends TestCase {
     private final Logger slf4jLogger = LoggerFactory.getLogger(getClass());

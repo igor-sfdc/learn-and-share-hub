@@ -1,4 +1,4 @@
-package coffeeshot.integration.util;
+package coffeeshop.integration.util;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
