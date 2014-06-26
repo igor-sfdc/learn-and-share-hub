@@ -3,7 +3,7 @@ This is an example of Selenium test automation for a resthub project
 How to create a resthub project:
 
 Open Command line and enter and enter the following command (per http://resthub.org/):
-
+```
 mvn archetype:generate -B \
 	-DarchetypeGroupId=org.resthub \
 	-DarchetypeArtifactId=resthub-jpa-backbonejs-archetype \
@@ -13,9 +13,9 @@ mvn archetype:generate -B \
 	-DartifactId=resthub-selenium-automation-example \
 	-Dversion=1.0-SNAPSHOT \
 	-Dpackage=resthub.selenium.automation.example
-	
+```	
 or in Windows
-
+```
 mvn archetype:generate -B ^
 	-DarchetypeGroupId=org.resthub ^
 	-DarchetypeArtifactId=resthub-jpa-backbonejs-archetype ^
@@ -25,7 +25,7 @@ mvn archetype:generate -B ^
 	-DartifactId=resthub-selenium-automation-example ^
 	-Dversion=1.0-SNAPSHOT ^
 	-Dpackage=resthub.selenium.automation.example
-
+```
 The next step is update pom.xml with dependencies and plugins needed for test automation:
 
 		<!-- Selenium dependencies -->
