@@ -41,7 +41,7 @@ mvn archetype:generate -B ^
  * At this point we are ready to begin incorporating Google Maps into our project
 
 -----------------
-#### Add [google-maps-loader.js](src/main/webapp/webapp/js/lib/google-maps-loader.js) script:
+#### Add [google-maps-loader.js](src/main/webapp/js/lib/google-maps-loader.js) script:
 Since Google Maps implementation may take long time to load, we need to provide a special loader script as explained [here](http://stackoverflow.com/a/20472763):
 ```
 var google_maps_loaded_def = null;
@@ -86,7 +86,7 @@ define(['googleMapsLoader', 'router/app-router', 'console'], function(GoogleMaps
     
 -----------------
 #### Add Google Maps wrapper ```<div>``` element to view template
- * Add a ```<div>``` element with ```id="map"``` to RESThub archetype-generated template [samples.hbs](src/main/webapp/templates/samples.hbs):
+ * Add a ```<div>``` element with ```id="map"``` to RESThub archetype-generated template [samples.hbs](src/main/webapp/template/samples.hbs):
   * ```<div id="map">Map Goes Here</div>```
 
 ----------------
@@ -139,4 +139,5 @@ define(['googleMapsLoader', 'router/app-router', 'console'], function(GoogleMaps
  * When program loading finishes enter ```http://localhost:8080``` into your browser
  * You should see the page with a black banner and a map in the center
    
-__We have now completed creating our fully-functional RESThub Web application with Google Maps!__
+__We have now completed creating our fully-functional RESThub Web application with Google Maps!__ 
+You can refer to this [commit](https://github.com/pshmulevich/learn-and-share-hub/commit/95042bb93f7b5a288426611b59ce950b836bea49) for the summary of required changes.
