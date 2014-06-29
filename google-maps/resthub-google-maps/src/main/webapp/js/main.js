@@ -77,7 +77,8 @@ require.config({
         moment: 'lib/moment',
         template: '../template',
 		json2: 'lib/json2',
-        console: 'lib/resthub/console'
+        console: 'lib/resthub/console',
+        googleMapsLoader: 'lib/google-maps-loader'
     }
 });
 

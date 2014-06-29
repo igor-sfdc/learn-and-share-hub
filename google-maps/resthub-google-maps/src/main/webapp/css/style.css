@@ -1,3 +1,10 @@
 /**
 *  Your specific application stylesheet
 **/
+
+#map {
+	width: 600px;
+	height: 600px;
+	display: block;
+	margin: auto;
+}

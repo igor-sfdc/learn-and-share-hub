@@ -15,7 +15,26 @@ function (Backbone, Resthub, Samples, samplesTemplate) {
             
             // Request unpaginated URL
             this.collection.fetch({ data: { page: 'no'} });
-        }
+        },
+        render: function() {
+            var html = this.template(this);
+            this.$el.html(html);
+    
+            this.renderMap();
+        },
+        renderMap: function() {
+            var lat = 0;
+            var lon = 0;
+            var z = 1;        
+            var myLatlng = new google.maps.LatLng(lat, lon);
+            var mapOptions = {
+                    zoom: z,
+                    center: myLatlng,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN
+            };
+            var mapTargetElement = $("#map")[0];
+            new google.maps.Map(mapTargetElement, mapOptions);
+        },
 
     });
     return SamplesView;
