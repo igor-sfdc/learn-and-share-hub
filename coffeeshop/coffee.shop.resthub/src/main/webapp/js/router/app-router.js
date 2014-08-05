@@ -21,7 +21,10 @@ function (Backbone, TabsView, HomeView, AboutView, CoffeesView, CoffeeView, Coff
         	});
         	
         	this.tabsView = new TabsView({ root: $('#tabs') });
-            Backbone.history.start({ pushState: true, root: "/" });
+        	//Before, if we navigated to a different tab and refreshed the page, it would give us a 404 error when pushState was True.
+        	//Now that we set pushState to False, it doesn't giv us that error.
+        	//In the process of analyzing why this happens.
+            Backbone.history.start({ pushState: false, root: "/" });
         },
 
         routes:{

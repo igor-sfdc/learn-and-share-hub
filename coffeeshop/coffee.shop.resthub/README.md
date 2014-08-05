@@ -86,8 +86,60 @@ By running the RESThub archetype I was able to generate many default parts for t
  * Once that is done, navigate to the coffee.hbs template file and add the div element needed to display the error messages ```<div id="error-messages"></div>```.
  * Now try to enter 0 into Weight field or leave Country unselected. we should see a proper error message displayed and no errors on the server-side.
 
+========================
+####Implement Junit tests for out coffeeshop models:
+Coffeeshop has two models, ```Coffee``` and ```Country```.
+Each model has its own special attributes which have getters and setters and we can test all of them.
+* Coffee model has ```Id```, ```Name```, ```Description```, ```Region```, ```Processed```, ```Weight```.
+ * (```Countryfrom``` is a little special and will be added later)
+* Country model has ```Latitude```, ```Longitude```, ```Zoom```, ```Name``` 
+
+##### Beginning to write the tests:
+Now that we know which models we want to test and which attributes we want to look at, the rest is fairly simple
+* Create a package where you want to test the models
+* In Eclipse, right click and choose to create New->Junit Test Case
+* Usually the test class has the same name as the class being test with ```Test``` suffix
+* We can enter the name of the class we want to test and then click browse and find it
+* Check setUp() and tearDown() checkboxes
+* After clicking next we are presented with the choice of methods to test, select them
+* We are now presented with a Junit test class skeleton and we just need to provide the actual test code
+
+##### Coffee model test class
+* First implement setUp() method, which is supposed to create a new instance of ```Coffee``` before each test
+* For getter tests we just assume that the mode has the initial (or default) value
+ * In the case of ```getNamd()```, the code will look like this: 
+     ```String coffeeName = coffee.getName();
+		assertNull(null, coffeeName);```
+
+* for setter tests we will need to set the actual value and assert the updated value by calling the getter
+ * The code will look like this:
+    ```	coffee.setName("Bolivian");
+		String coffeeName = coffee.getName();
+		assertEquals("Bolivian", coffeeName);```
+
+* There are some special cases to note:
+ * Testing ```coffeeId``` getters and setters: note that ```coffeeId``` is a ```Long``` object and not a ```long``` primitive so we have to compare it with ```null``` and not ```0```
+     ```public void testGetId() {
+		Long coffeeId = coffee.getId();
+		assertNull(null, coffeeId);```
+
+* In the test for ```Country``` class we have to deal with float fields when it comes to ```Latitude``` and ```Longitude```
+* Keep in mind that you cannot compare two float values so you have to use a small delta value to require the difference to be smaller than ```delta```, which is the margin of error
+ * The tests will look like so:
+  ```
+	public void testGetLatitude() {
+		double latitude = country.getLatitude();
+		assertEquals(0.0, latitude, 0.0);
+	} 
+	
+	public void testSetLatitude() {
+		country.setLatitude(0.0);
+		double latitude = country.getLatitude();
+		assertEquals(0, latitude, 0.0);
+	}
+	```	
 =======================	
-#### Implement Selenium-integration test for the primary flow;
+#### Implement Selenium-integration test for the primary flow:
  * Now that the project is set up, we need to test the flow of operations. The optimal test would be to create a new coffee element.
  * The automated test should go navigate from the home page to the new coffee page, it should find and access the edit coffee feature, and should successfully create a new coffee element and cease upon saving.
  * The critical features of this are:
@@ -98,11 +150,52 @@ By running the RESThub archetype I was able to generate many default parts for t
   * Edit that condition and move to the next we wish to edit
   * End and save by locating the "save" feature and use the click to activate it
   * To optimize performance, include conditional messages to catch failures
-		
+
 =======================
 #### Implement Selenium-integration test for the validation/error handling flow:
  * Now that a best-case scenario has proven fruitful and demonstrates an automated test, another is needed to be able to test the validation features of the project.
  * To do this, key issues need to be triggered like a name of appropriate length, a weight above zero, and the selection of an actual country rather than left blank.
  * The same procedures apply as stated above with the exception that they are designed to intentionally trigger validation conflict.
 
+ =======================
+ #### Google Maps Implementation
+ You can look [here](https://github.com/pshmulevich/learn-and-share-hub/tree/master/google-maps/resthub-google-maps) for a previous tutorial on how to incorporate Google Maps into your project.
+ Described below are the unique steps for this project:
+ ====================================================== 
  
+Google Maps is going to allow us to consolidate and add visual to our ```Coffee``` and ```Country``` mapping.
+==============
+
+#### How country location works for the actual official Google Maps:
+* The country fields like latitude, longitude, and zoom are attributes that help the map location. These fields are found as parts of the url:
+```https://www.google.com/maps/place/Paraguay/@-23.4380203,-58.4483065,7z/data=!3m1!4b1!4m2!3m1!1s0x945c083490f13d63:0xb3faff611d582ef3```
+Data from the url:
+ * Latitude is -23.4380203
+ * Longitude is -58.4483065
+ * Zoom is 7(z)
+These same attributes are linked to ```countryFrom``` name attribute in my project.
+
+The attributes like Name, Latitude, Longitude, and Zoom supply the Google Maps application with the information to successfully map the country selected in the coffee form.
+Assign the following attributes into ```Coffee.java``` and ```Country.java``` respectively:
+* In the ```Coffee.java``` class file you will need to include the ```Country countryFrom;``` and the getters and setters associated with it to create to assert data. 
+* In the ```Country.java``` class file you will need to include the fields ```id```, ```Latitude```, ```Longitude```, ```Zoom```, parameters and the getters and setters for each.---------
+
+These attributes will help organize the data between the coffee form and Google Maps.
+
+### [```coffee.hbs```](https://github.com/pshmulevich/learn-and-share-hub/blob/master/coffeeshop/coffee.shop.resthub/src/main/webapp/template/coffee.hbs) needs a critical feature for the country selected.
+* Whereas most of the other attributes selected can be called back like so:
+```<td>Name:</td><td><input id="name" 	type="text" value="{{model.attributes.name}}"></td>``` and we would get the actual value.
+If we did the same for country, ```<td>Name:</td><td><input id="country" type="text" value="{{model.attributes.country}}"></td>```we would get a scramble of letters and numbers.
+The reason for this is that the country value itself is more complex to receive.
+We will need to modify the code to look like this: 
+```<td>Country:</td><td>
+			<select id="countryFrom" name="countryFrom">
+    			<option value="">--select a country--</option>
+    			
+    			{{#each countryCollection.models}}
+        			<option {{#ifeq attributes.id ../model.attributes.countryFrom.id}}selected{{else}}{{/ifeq}} 
+        					value="{{attributes.id}}">{{attributes.name}}</option>
+    			{{/each}}
+    			
+			</select>
+		</td>```

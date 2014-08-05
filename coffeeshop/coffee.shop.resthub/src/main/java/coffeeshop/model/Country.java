@@ -12,9 +12,9 @@ public class Country {
     @Column(name = "country_id")
     private Long id;
 	private String name;
-	private float Latitude;
-	private float Longitude;
-	private int Zoom;
+	private float latitude;
+	private float longitude;
+	private int zoom;
 
 	public Country(String name) {
 		this.name = name;
@@ -31,15 +31,15 @@ public class Country {
 		this.id = id;
 	}
 	public float getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	public float getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public int getZoom() {
-		return Zoom;
+		return zoom;
 	}
 
 	public String getName() {
@@ -47,15 +47,15 @@ public class Country {
 	}
 	
 	public void setLatitude(double d) {
-	       this.Latitude = (float) d;
+	       this.latitude = (float) d;
 	}
 
 	public void setLongitude(double d) {
-	       this.Longitude = (float) d;
+	       this.longitude = (float) d;
 	}
 
 	public void setZoom(int Zoom) {
-	       this.Zoom = Zoom;
+	       this.zoom = Zoom;
 	}
 
 	public void setName(String name) {
